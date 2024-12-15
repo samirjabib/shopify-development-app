@@ -1,7 +1,7 @@
 # Learn more about configuring your app at https://shopify.dev/docs/apps/tools/cli/configuration
 
 client_id = "d49f139c653ea0c92c2bd9ee95490567"
-application_url = "https://kijiji-lightning-ye-qui.trycloudflare.com"
+application_url = "https://enquiries-betting-limousines-lawyers.trycloudflare.com"
 embedded = true
 name = "course-app"
 handle = "course-app-13"
@@ -23,9 +23,9 @@ scopes = "write_products"
 
 [auth]
 redirect_urls = [
-  "https://kijiji-lightning-ye-qui.trycloudflare.com/auth/callback",
-  "https://kijiji-lightning-ye-qui.trycloudflare.com/auth/shopify/callback",
-  "https://kijiji-lightning-ye-qui.trycloudflare.com/api/auth/callback"
+  "https://enquiries-betting-limousines-lawyers.trycloudflare.com/auth/callback",
+  "https://enquiries-betting-limousines-lawyers.trycloudflare.com/auth/shopify/callback",
+  "https://enquiries-betting-limousines-lawyers.trycloudflare.com/api/auth/callback"
 ]
 
 [pos]
