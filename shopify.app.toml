@@ -1,10 +1,14 @@
 # Learn more about configuring your app at https://shopify.dev/docs/apps/tools/cli/configuration
 
 client_id = "d49f139c653ea0c92c2bd9ee95490567"
-application_url = "https://genre-forming-generous-studio.trycloudflare.com"
+application_url = "https://prot-lauren-climate-events.trycloudflare.com"
 embedded = true
 name = "course-app"
 handle = "course-app-13"
+
+[build]
+automatically_update_urls_on_dev = true
+dev_store_url = "testing-app-samir.myshopify.com"
 
 [webhooks]
 api_version = "2024-10"
@@ -15,18 +19,14 @@ api_version = "2024-10"
 
 [access_scopes]
 # Learn more at https://shopify.dev/docs/apps/tools/cli/configuration#access_scopes
-scopes = "read_products,write_products"
+scopes = "write_products"
 
 [auth]
 redirect_urls = [
-  "https://genre-forming-generous-studio.trycloudflare.com/auth/callback",
-  "https://genre-forming-generous-studio.trycloudflare.com/auth/shopify/callback",
-  "https://genre-forming-generous-studio.trycloudflare.com/api/auth/callback"
+  "https://prot-lauren-climate-events.trycloudflare.com/auth/callback",
+  "https://prot-lauren-climate-events.trycloudflare.com/auth/shopify/callback",
+  "https://prot-lauren-climate-events.trycloudflare.com/api/auth/callback"
 ]
 
 [pos]
 embedded = false
-
-[build]
-dev_store_url = "testing-app-samir.myshopify.com"
-automatically_update_urls_on_dev = true

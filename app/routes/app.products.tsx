@@ -1,11 +1,9 @@
 import { LoaderFunctionArgs } from "@remix-run/node";
+import { useLoaderData, useRouteError } from "@remix-run/react";
 import { Card, Layout, Page, Text } from "@shopify/polaris";
-import { authenticate, apiVersion } from "app/shopify.server";
-
-
-import { useLoaderData, useRouteError } from '@remix-run/react';
 import { boundary } from "@shopify/shopify-app-remix/server";
-import { GetCollectionsQuery } from "app/types/admin.generated";
+import { authenticate, apiVersion } from "app/shopify.server";
+import { GetProductsQuery } from "app/types/admin.generated";
 
 export function ErrorBoundary() {
     return boundary.error(useRouteError());
@@ -13,8 +11,8 @@ export function ErrorBoundary() {
 
 
 
-export type LoaderDataType = {
-    collections: GetCollectionsQuery["collections"];
+export type LoaderProductsType = {
+    products: GetProductsQuery["products"]
 }
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
@@ -23,8 +21,8 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
     try {
         const response = await admin.graphql(
             `#graphql
-                query GetCollections {
-                    collections(first: 10) {
+                query GetProducts {
+                    products(first: 10) {
                         edges {
                             node {
                                 title
@@ -41,10 +39,10 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
         );
 
         const data = await response.json(); // Read the response body once
-        console.log(data.data?.collections, 'im the response');
+        console.log(data.data?.products, 'im the response');
         if (response.ok) {
             return {
-                collections: data.data?.collections
+                products: data.data?.products
             }
         }
 
@@ -55,21 +53,20 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
     return null;
 };
 
-const Collections = () => {
-    const { collections } = useLoaderData<LoaderDataType>();
-    return (
-        <Page>
-            <Layout>
-                <Layout.Section>
-                    <Card>
-                        {collections?.edges.map((collection) => (
-                            <Text key={collection.node.id} as="p">{collection.node.title}</Text>
-                        ))}
-                    </Card>
-                </Layout.Section>
-            </Layout>
-        </Page>
-    );
+const Products = () => {
+    const { products } = useLoaderData<LoaderProductsType>();
+    return <Page>
+
+        <Layout>
+            <Layout.Section>
+                <Card>
+                    {products?.edges.map((product) => (
+                        <Text key={product.node.id} as="p">{product.node.title}</Text>
+                    ))}
+                </Card>
+            </Layout.Section>
+        </Layout>
+    </Page>
 };
 
-export default Collections;
+export default Products;
