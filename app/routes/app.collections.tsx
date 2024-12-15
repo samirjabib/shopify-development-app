@@ -18,7 +18,6 @@ export type LoaderDataType = {
 }
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
-    console.log("soy el console log de loader");
     const { admin } = await authenticate.admin(request);
     try {
         const response = await admin.graphql(
@@ -40,7 +39,7 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
             }
         );
 
-        const data = await response.json(); // Read the response body once
+        const data = await response.json();
         console.log(data.data?.collections, 'im the response');
         if (response.ok) {
             return {

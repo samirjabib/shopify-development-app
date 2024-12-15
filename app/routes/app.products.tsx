@@ -16,7 +16,6 @@ export type LoaderProductsType = {
 }
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
-    console.log("soy el console log de loader");
     const { admin } = await authenticate.admin(request);
     try {
         const response = await admin.graphql(

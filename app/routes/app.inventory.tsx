@@ -10,19 +10,26 @@ export type LoaderInventoryType = {
     inventory: GetProductsQuery["products"]
 }
 
+export function ErrorBoundary() {
+    return boundary.error(useRouteError());
+}
+
+
 export const loader = async ({ request }: LoaderFunctionArgs) => {
-    console.log("soy el console log de loader");
     const { admin } = await authenticate.admin(request);
     try {
         const response = await admin.graphql(
             `#graphql
                 query GetInventoryItems {
-                    products(first: 10) {
+                    inventoryItems(first: 10) {
                         edges {
                             node {
-                                title
-                                handle
-                                id
+                              id
+                             variant {
+                               id
+                               displayName
+                               price
+                             }
                             }
                         }
                     }
