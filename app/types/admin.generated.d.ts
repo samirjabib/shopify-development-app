@@ -29,11 +29,11 @@ export type GetCollectionsQuery = { collections: { edges: Array<{ node: Pick<Adm
 export type GetProductsQueryVariables = AdminTypes.Exact<{ [key: string]: never; }>;
 
 
-export type GetProductsQuery = { products: { edges: Array<{ node: Pick<AdminTypes.Product, 'title' | 'handle' | 'id'> }> } };
+export type GetProductsQuery = { products: { edges: Array<{ node: Pick<AdminTypes.Product, 'title' | 'handle' | 'description' | 'id'> }> } };
 
 interface GeneratedQueryTypes {
   "#graphql\n                query GetCollections {\n                    collections(first: 10) {\n                        edges {\n                            node {\n                                title\n                                handle\n                                id\n                            }\n                        }\n                    }\n                }\n            ": {return: GetCollectionsQuery, variables: GetCollectionsQueryVariables},
-  "#graphql\n                query GetProducts {\n                    products(first: 10) {\n                        edges {\n                            node {\n                                title\n                                handle\n                                id\n                            }\n                        }\n                    }\n                }\n            ": {return: GetProductsQuery, variables: GetProductsQueryVariables},
+  "#graphql\n                query GetProducts {\n                    products(first: 10) {\n                        edges {\n                            node {\n                                title\n                                handle\n                                description\n                                id\n                            }\n                        }\n                    }\n                }\n            ": {return: GetProductsQuery, variables: GetProductsQueryVariables},
 }
 
 interface GeneratedMutationTypes {
