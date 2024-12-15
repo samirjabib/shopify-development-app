@@ -5,6 +5,7 @@ import { authenticate, apiVersion } from "app/shopify.server";
 
 import { useLoaderData, useRouteError } from '@remix-run/react';
 import { boundary } from "@shopify/shopify-app-remix/server";
+import { GetCollectionsQuery } from "app/types/admin.generated";
 
 export function ErrorBoundary() {
     return boundary.error(useRouteError());
@@ -12,7 +13,9 @@ export function ErrorBoundary() {
 
 
 
-
+export type LoaderDataType = {
+    collections: GetCollectionsQuery["collections"];
+}
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
     console.log("soy el console log de loader");
@@ -20,7 +23,7 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
     try {
         const response = await admin.graphql(
             `#graphql
-                query {
+                query GetCollections {
                     collections(first: 10) {
                         edges {
                             node {
@@ -38,9 +41,11 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
         );
 
         const data = await response.json(); // Read the response body once
-        console.log(data.data.collections.edges, 'im the response');
+        console.log(data.data?.collections, 'im the response');
         if (response.ok) {
-            return data.data.collections.edges;
+            return {
+                collections: data.data?.collections
+            }
         }
 
         return null;
@@ -51,8 +56,8 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
 };
 
 const Collections = () => {
-    const data = useLoaderData<typeof loader>();
-    console.log("Collections", data);
+    const { collections } = useLoaderData<LoaderDataType>();
+    console.log("Collections", collections);
     return (
         <Page>
             <Layout>

@@ -21,7 +21,13 @@ export type ShopifyRemixTemplateUpdateVariantMutationVariables = AdminTypes.Exac
 
 export type ShopifyRemixTemplateUpdateVariantMutation = { productVariantsBulkUpdate?: AdminTypes.Maybe<{ productVariants?: AdminTypes.Maybe<Array<Pick<AdminTypes.ProductVariant, 'id' | 'price' | 'barcode' | 'createdAt'>>> }> };
 
+export type GetCollectionsQueryVariables = AdminTypes.Exact<{ [key: string]: never; }>;
+
+
+export type GetCollectionsQuery = { collections: { edges: Array<{ node: Pick<AdminTypes.Collection, 'title' | 'handle' | 'id'> }> } };
+
 interface GeneratedQueryTypes {
+  "#graphql\n                query GetCollections {\n                    collections(first: 10) {\n                        edges {\n                            node {\n                                title\n                                handle\n                                id\n                            }\n                        }\n                    }\n                }\n            ": {return: GetCollectionsQuery, variables: GetCollectionsQueryVariables},
 }
 
 interface GeneratedMutationTypes {
