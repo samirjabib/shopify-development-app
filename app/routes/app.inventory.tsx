@@ -55,7 +55,7 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
     return null;
 };
 const Inventory = () => {
-    return <div className="bg-red-500">Inventory</div>;
+    return <div className="bg-red-500"></div>;
 };
 
 export default Inventory;
